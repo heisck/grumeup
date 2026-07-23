@@ -59,7 +59,7 @@ export function TypingHeader() {
       {/* Top Logo & GrumeUp Brand Wordmark */}
       <div className="flex items-center justify-center gap-3 sm:gap-4">
         {/* Light Theme Logo Icon (Black GP loop) */}
-        <div className="relative w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 dark:hidden">
+        <div className="relative w-12 h-12 sm:w-14 sm:h-14 shrink-0 dark:hidden">
           <Image
             src="/brand-logo-dark.png"
             alt="GrumeUp Icon"
@@ -72,7 +72,7 @@ export function TypingHeader() {
         </div>
 
         {/* Dark Theme Logo Icon (Light GP loop) */}
-        <div className="relative w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 hidden dark:block">
+        <div className="relative w-12 h-12 sm:w-14 sm:h-14 shrink-0 hidden dark:block">
           <Image
             src="/brand-logo-light.png"
             alt="GrumeUp Icon"
@@ -85,7 +85,7 @@ export function TypingHeader() {
         </div>
 
         {/* GrumeUp Official Wordmark Image */}
-        <div className="relative h-10 sm:h-12 w-40 sm:w-48 flex-shrink-0">
+        <div className="relative h-10 sm:h-12 w-40 sm:w-48 shrink-0">
           <Image
             src="/brand-wordmark.png"
             alt="GrumeUp"
@@ -100,14 +100,14 @@ export function TypingHeader() {
 
       {/* Typewriter Welcome & Subtitle */}
       <div className="space-y-1">
-        <h2 className="text-base sm:text-lg font-bold text-black dark:text-white tracking-tight min-h-[24px] flex items-center justify-center">
+        <h2 className="text-base sm:text-lg font-bold text-black dark:text-white tracking-tight min-h-6 flex items-center justify-center">
           <span>{typedTitle}</span>
           {!isTitleDone && (
             <span className="inline-block ml-1 w-2 h-4 bg-black dark:bg-white animate-pulse rounded-[1px]" />
           )}
         </h2>
 
-        <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-sans min-h-[18px] flex items-center justify-center">
+        <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-sans min-h-4.5 flex items-center justify-center">
           <span>{typedSubtitle}</span>
           {isTitleDone && (
             <span className="inline-block ml-1 w-1.5 h-3.5 bg-zinc-600 dark:bg-zinc-300 animate-pulse rounded-[1px]" />

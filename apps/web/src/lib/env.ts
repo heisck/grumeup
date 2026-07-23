@@ -19,6 +19,16 @@ const serverEnvSchema = z.object({
   GOOGLE_CLIENT_ID: z.string().optional(),
   GOOGLE_CLIENT_SECRET: z.string().optional(),
   AUTH_SECRET: z.string().optional(),
+  INITIAL_ADMIN_NAME: z.string().default("Admin"),
+  INITIAL_ADMIN_EMAIL: z.string().email().default("admin@grumeup.com"),
+  INITIAL_ADMIN_PASSWORD: z.string().default("admin_secure_password_123"),
+
+  // SMTP Email
+  SMTP_HOST: z.string().default("smtp.gmail.com"),
+  SMTP_PORT: z.coerce.number().int().default(587),
+  SMTP_USER: z.string().optional(),
+  SMTP_PASS: z.string().optional(),
+  SMTP_FROM: z.string().optional(),
 
   // Environment
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),

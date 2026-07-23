@@ -10,9 +10,13 @@
     "test": "vitest run --passWithNoTests",
     "clean": "rm -rf dist .turbo"
   },
+  "dependencies": {
+    "nodemailer": "^6.10.0"
+  },
   "devDependencies": {
     "@grumeup/config": "workspace:*",
     "@types/node": "^22.15.21",
+    "@types/nodemailer": "^6.4.17",
     "typescript": "^5.8.3",
     "vitest": "^4.1.10"
   }

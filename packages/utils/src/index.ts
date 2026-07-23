@@ -5,5 +5,5 @@
  * Keep utilities pure, well-typed, and thoroughly tested.
  */
 
-// Placeholder — utilities will be added as features are built
-export {};
+export * from "./auth-crypto";
+export * from "./email";

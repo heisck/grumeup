@@ -11,19 +11,23 @@ const globalForRedis = globalThis as unknown as {
 };
 
 function createRedisClient(): Redis {
-  const url = process.env["REDIS_URL"];
+  const url = process.env["REDIS_URL"] ?? "redis://localhost:6379";
 
-  if (!url) {
-    throw new Error("REDIS_URL environment variable is not set");
-  }
-
-  return new Redis(url, {
+  const client = new Redis(url, {
     maxRetriesPerRequest: 3,
     retryStrategy(times) {
       const delay = Math.min(times * 50, 2000);
       return delay;
     },
   });
+
+  client.on("error", (err) => {
+    if (process.env["NODE_ENV"] === "development") {
+      console.warn("[Redis warning]:", err.message);
+    }
+  });
+
+  return client;
 }
 
 export const redis = globalForRedis.redis ?? createRedisClient();

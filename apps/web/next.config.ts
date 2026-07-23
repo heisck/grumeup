@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // ─── Standalone Output for Docker Containerization ────────
+  output: "standalone",
+
   // ─── React ────────────────────────────────────────────────
   reactStrictMode: true,
 

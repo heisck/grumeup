@@ -15,3 +15,30 @@ model HealthCheck {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
 }
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+}
+
+model Admin {
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  phone        String?
+  passwordHash String
+  role         AdminRole @default(SUPER_ADMIN)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  sessions     Session[]
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  adminId   String
+  admin     Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+

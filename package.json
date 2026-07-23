@@ -21,6 +21,10 @@
     "knip": "knip",
     "madge": "madge --circular --extensions ts,tsx apps/ packages/",
     "check-all": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run test:unit",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:build": "docker build -t grumeup-web .",
+    "docker:prod": "docker compose -f docker-compose.prod.yml up -d",
     "prepare": "husky"
   },
   "devDependencies": {

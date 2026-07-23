@@ -1,7 +1,10 @@
 {
   "extends": "@grumeup/config/typescript/tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "paths": {
+      "@grumeup/utils": ["../utils/src"]
+    }
   },
   "include": ["src", "prisma.config.ts"]
 }
