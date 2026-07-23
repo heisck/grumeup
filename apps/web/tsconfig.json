@@ -1,0 +1,21 @@
+{
+  "extends": "@grumeup/config/typescript/tsconfig.next.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@grumeup/ui": ["../../packages/ui/src"],
+      "@grumeup/database": ["../../packages/database/src"],
+      "@grumeup/cache": ["../../packages/cache/src"],
+      "@grumeup/types": ["../../packages/types/src"],
+      "@grumeup/utils": ["../../packages/utils/src"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", ".next", "dist", "coverage", "playwright-report"]
+}

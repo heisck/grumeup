@@ -1,0 +1,17 @@
+// ─── Prisma Schema ────────────────────────────────────────
+// GrumeUp Database Schema
+// Provider: PostgreSQL (Prisma 7 format)
+// ──────────────────────────────────────────────────────────
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model HealthCheck {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+}

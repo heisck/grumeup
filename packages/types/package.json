@@ -1,0 +1,15 @@
+{
+  "name": "@grumeup/types",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "devDependencies": {
+    "@grumeup/config": "workspace:*",
+    "typescript": "^5.8.3"
+  }
+}

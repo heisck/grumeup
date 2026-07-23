@@ -1,0 +1,41 @@
+{
+  "name": "grumeup",
+  "private": true,
+  "packageManager": "pnpm@10.12.1",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:unit": "turbo run test:unit",
+    "test:integration": "turbo run test:integration",
+    "test:e2e": "turbo run test:e2e",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
+    "knip": "knip",
+    "madge": "madge --circular --extensions ts,tsx apps/ packages/",
+    "check-all": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run test:unit",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.5",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "husky": "^9.1.7",
+    "knip": "^5.61.1",
+    "lint-staged": "^16.1.0",
+    "madge": "^8.0.0",
+    "turbo": "^2.10.6"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx,json,css,md}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
+  }
+}

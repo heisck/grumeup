@@ -1,0 +1,34 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "scripts/*.sh",
+    "tests/e2e/**/*.ts",
+    "tests/load/k6/**/*.js",
+    "apps/web/src/lib/env.ts"
+  ],
+  "ignore": ["**/.next/**", "**/.turbo/**", "**/dist/**"],
+  "ignoreDependencies": ["next", "@playwright/test"],
+  "workspaces": {
+    "apps/web": {
+      "ignoreDependencies": [
+        "@grumeup/*",
+        "@gsap/react",
+        "@react-three/*",
+        "framer-motion",
+        "gsap",
+        "three",
+        "zod",
+        "@next/bundle-analyzer",
+        "@testing-library/*",
+        "@types/*",
+        "jsdom",
+        "msw",
+        "tailwindcss",
+        "@vitejs/plugin-react"
+      ]
+    },
+    "packages/ui": {
+      "ignoreDependencies": ["class-variance-authority", "react", "react-dom", "@types/*"]
+    }
+  }
+}

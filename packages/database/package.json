@@ -1,0 +1,27 @@
+{
+  "name": "@grumeup/database",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "db:seed": "tsx prisma/seed.ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo node_modules/.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.9.0",
+    "@prisma/config": "^7.9.0"
+  },
+  "devDependencies": {
+    "@grumeup/config": "workspace:*",
+    "@types/node": "^22.15.21",
+    "prisma": "^7.9.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

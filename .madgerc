@@ -1,0 +1,11 @@
+{
+  "fileExtensions": ["ts", "tsx"],
+  "excludeRegExp": [
+    "node_modules",
+    "\\.next",
+    "\\.turbo",
+    "dist",
+    "coverage"
+  ],
+  "tsConfig": "./apps/web/tsconfig.json"
+}
