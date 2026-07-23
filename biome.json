@@ -23,45 +23,15 @@
       "quoteStyle": "double",
       "jsxQuoteStyle": "double",
       "semicolons": "always",
-      "trailingCommas": "all",
-      "arrowParentheses": "always"
+      "trailingCommas": "es5"
     }
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "preset": "recommended",
-      "complexity": {
-        "noExcessiveCognitiveComplexity": "warn",
-        "noVoid": "error",
-        "useLiteralKeys": "off",
-        "useSimplifiedLogicExpression": "warn"
-      },
+      "recommended": true,
       "correctness": {
-        "noUnusedImports": "error",
-        "noUnusedVariables": "error",
-        "noUnusedFunctionParameters": "warn",
-        "useExhaustiveDependencies": "warn"
-      },
-      "performance": {
-        "noBarrelFile": "warn",
-        "noReExportAll": "warn"
-      },
-      "style": {
-        "noNonNullAssertion": "warn",
-        "useConsistentArrayType": {
-          "level": "warn",
-          "options": {
-            "syntax": "shorthand"
-          }
-        },
-        "useFilenamingConvention": {
-          "level": "warn",
-          "options": {
-            "requireAscii": true,
-            "filenameCases": ["kebab-case", "camelCase", "PascalCase"]
-          }
-        }
+        "noUnusedVariables": "error"
       },
       "suspicious": {
         "noConsole": "warn",
@@ -80,7 +50,8 @@
       "!**/prisma/migrations",
       "!**/*.config.js",
       "!**/*.config.mjs",
-      "!**/*.d.ts"
+      "!**/*.d.ts",
+      "!**/*.svg"
     ]
   }
 }

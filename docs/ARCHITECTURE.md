@@ -2,9 +2,9 @@
 
 ## Overview
 
-GrumeUp is a production-grade, real-time student group interview queue & scheduling system. Built as a Turborepo monorepo with pnpm workspaces, Next.js 16 (App Router), PostgreSQL + Prisma, Redis, and Progressive Web App (PWA) push notification support.
+GrumeUp is a production-grade, real-time student group interview queue & dynamic calendar scheduling platform built as a Turborepo monorepo with pnpm workspaces, Next.js 16 (App Router), PostgreSQL + Prisma, Redis, Lenis, GSAP, and Progressive Web App (PWA) push notifications.
 
-## Key Modules & User Roles
+## System Topology & Flow
 
 ```
                       ┌─────────────────────────────────────────┐
@@ -17,48 +17,35 @@ GrumeUp is a production-grade, real-time student group interview queue & schedul
         │   Admin Portal   │                               │  Student Portal  │
         └─────────┬────────┘                               └────────┬─────────┘
                   │                                                 │
-  ├── Admin Auth (.env + Passkey / OAuth)           ├── Real-time Queue View
-  ├── Manage Admins (Name, Email, Phone)            ├── Estimated Interview Time
-  ├── Bulk Group Upload (PDF, Excel, CSV, Docs)     ├── "I'm Coming" Status Toggle
-  └── Trigger "Next Group" (PWA Web Push)           └── Interactive Multi-level Calendar
+  ├── Seed Admin Auth (.env + Passkey / OAuth)      ├── Real-time Queue Status
+  ├── Add Admins (Name, Email, Phone)               ├── Interview Time Window Estimate
+  ├── Upload Student Groups (PDF, Excel, CSV, Docs) ├── "I'm Coming" Presence Toggle
+  └── Trigger "Next Group" (PWA Push Broadcast)     └── Multi-Level Zoomable Calendar View
 ```
 
-## System Workflow & UI Layout
+## Calendar Component Stack & Micro-Interaction Subsets
 
-1. **Top Bar Header**: System Branding ("Gumi App / GrumeUp"), Search Bar (students, groups, time slots), Current Group Banner (prominent display), and Next Group Banner (preview slot).
-2. **Interactive Zoomable Calendar**:
-   - **Month Overview**: Grid view of days (1st – 30th/31st).
-   - **Day Zoom (Date Click)**: 24-Hour timeline breakdown (12:00 AM – 11:59 PM).
-   - **Hour Zoom (Hour Click)**: Minute-level interval slots (e.g. 1:00 PM – 1:59 PM) displaying scheduled groups, student avatars, estimated start/end times, and status badges.
-3. **Queue & Estimation Engine**:
-   - Group slots configured by Admin (e.g., 15 minutes per group).
-   - Dynamic time estimation calculated using average interview duration and position in queue.
-   - PWA Web Push Notifications broadcast to offline/online students when their group is called up.
+GrumeUp supports both standard scheduling UI (`BigCalendar` via `@grumeup/web`) and an immersive micro-interaction calendar layer (Month → Day Hours → Minute Slots):
 
-## Monorepo Architecture
+### 1. Motion & Micro-Interaction System (GSAP & Lenis)
+- **GSAP `quickTo` (Magnetic Pull)**: Optimized cursor and hover tracking on calendar date cells, hour slots, and student avatars.
+- **Velocity & Inertia Tracking**: Using GSAP `InertiaPlugin` to calculate scroll velocity when scrubbing through hour/minute blocks.
+- **FLIP Animation Pattern (First, Last, Invert, Play)**: Seamless position and scale calculations when zooming a date cell to full-screen 24-hour day view.
+- **Lenis Scroll Instance Locking**: Locking layout scroll during zoom transitions so user wheel movements scrub through time increments rather than shifting the page.
 
-```
-apps/web/               # Next.js 16 App Router + PWA Service Worker
-├── src/app/            # App Router routes (Auth, Admin, Student Queue, Calendar)
-├── src/components/     # Modular client/server components (<300 lines each)
-├── src/hooks/          # Custom React hooks
-└── src/lib/            # Utilities, env schemas, query client setup
+### 2. High-Performance Rendering & Shader Subsets (Planned / Optional Layer)
+- **FBO Texture Switching (Frame Buffer Objects)**: Off-screen buffer rendering to morph or dissolve date tiles as the user drills into hourly timelines.
+- **Instanced Mesh Matrix Transforms**: Batch rendering date numbers and minute slots at 60+ FPS.
+- **SDF Typography (Signed Distance Fields)**: Vector-sharp font rendering during deep zoom transitions.
+- **Raycasting Spatial Hashing**: Precise interaction detection for 3D cursor picking across minute slots.
 
-packages/
-├── ui/                 # Shared UI components (shadcn/ui, Tailwind CSS 4)
-├── database/           # Prisma client, PostgreSQL schema & migrations
-├── cache/              # Redis client + ioredis queue caching
-├── types/              # Shared TypeScript interfaces & Zod schemas
-└── utils/              # Shared helper functions & estimation algorithms
-```
-
-## Data Flow
+## Data Layer & Infrastructure
 
 ```
-User (Browser / PWA)
+Browser / PWA Client
   │
   ▼
-Next.js App Router (Server Components & Server Actions)
+Next.js App Router (Server Actions & Route Handlers)
   │
   ├── Guard Clauses & Zod Validation
   ├── Redis Cache / Queue Manager (Fast reads & state broadcasts)

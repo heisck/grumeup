@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /*
  * ─── GrumeUp Design Tokens ───────────────────────────────
  *
@@ -34,7 +36,7 @@
   --color-error: oklch(0.65 0.22 25);
 
   /* ─── Typography ─────────────────────────────────────── */
-  --font-sans: "Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif";
+  --font-sans: "Roboto", var(--font-sans), "system-ui", "-apple-system", "Segoe UI", "sans-serif";
   --font-mono: "JetBrains Mono", "Fira Code", "monospace";
 
   /* ─── Spacing ────────────────────────────────────────── */
@@ -88,7 +90,6 @@
   }
   to {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
@@ -106,13 +107,23 @@ body {
   color: var(--color-surface-900);
 }
 
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"] {
+  cursor: pointer;
+}
+
+button:disabled,
+[role="button"][aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
 /* ─── Dark Mode ──────────────────────────────────────────── */
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: var(--color-surface-950);
-    color: var(--color-surface-100);
-  }
+.dark body {
+  background-color: #000000;
+  color: #ffffff;
 }
 
 /* ─── Focus Styles ───────────────────────────────────────── */

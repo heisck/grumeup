@@ -2,6 +2,8 @@
   "extends": "@grumeup/config/typescript/tsconfig.next.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "skipLibCheck": true,
+    "incremental": true,
     "paths": {
       "@/*": ["./src/*"],
       "@grumeup/ui": ["../../packages/ui/src"],

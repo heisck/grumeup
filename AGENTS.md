@@ -16,12 +16,17 @@ GrumeUp is a real-time student group interview queue & dynamic calendar scheduli
 
 ## Core Agent Rules & Coding Standards
 
-### File Size & Modular Design
+### Strict Scope & User Directive Adherence
+- **Strict Requirement Scoping**: If the user does not explicitly request a feature or UI element, DO NOT add it. Never invent unrequested icons, extra badges, or unneeded controls. Follow the user's instructions with exact precision.
+- **No Unrequested Color Gradients**: Never add color gradients unless explicitly instructed by the user. When asked to remove color gradients, ensure NO TRACE of color gradients remains in the system. Stick strictly to clean black & white / monochrome styling.
+
+### File Size & Modular Component Design
 - **Maximum 300 Lines Per File**: No file should exceed 300 lines of code. Keep code strictly modular. If a file approaches 300 lines, extract helper functions, hooks, or sub-components.
-- **Component Reusability**: Always build modular, reusable UI components. Check `@grumeup/ui` and existing components before writing new UI elements. Never re-create components that already exist.
+- **Strict Component Reusability**: Always build modular, reusable UI components (`Tooltip`, `ThemeToggle`, `AuthCard`, etc.). Check `@grumeup/ui` and existing components before writing new UI elements. Never re-create components or inline duplicates when an existing component can be reused or created once.
 
 ### Logic & Control Flow
 - **No Chained or Deeply Nested `if` Statements**: Use early returns (`guard clauses`) to reduce nesting, increase readability, and enable fast execution paths.
+- **Zero Layout Shift Errors**: Inline error messages must use fixed-height reserved containers to prevent layout jumping when errors display.
 - **Senior Developer Standards**: Think before touching any file. Write optimized, production-grade, unbloated TypeScript. No simplified or placeholder implementations.
 
 ### Codebase Hygiene & Cleanup
@@ -37,6 +42,8 @@ GrumeUp is a real-time student group interview queue & dynamic calendar scheduli
 - **Conventional Commits**: Format `type(scope): description` (e.g., `feat(queue): add next group push notification`).
 
 ## Forbidden Patterns
+- ❌ Adding unrequested icons, badges, or features not explicitly requested by user
+- ❌ Unrequested color gradients (must remain clean black & white / monochrome)
 - ❌ Files exceeding 300 lines of code
 - ❌ Deeply nested/chained `if` statements (must use early returns)
 - ❌ Duplicate/re-created components instead of reusing existing ones
