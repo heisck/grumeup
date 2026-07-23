@@ -8,6 +8,13 @@ export interface SendEmailOptions {
   text: string;
 }
 
+export interface SendEmailResult {
+  success: boolean;
+  delivered: boolean;
+  mockCode?: string;
+  error?: string;
+}
+
 /**
  * Generate a cryptographically secure 6-digit numeric OTP code.
  */
@@ -19,7 +26,7 @@ export function generateOtpCode(): string {
 /**
  * Send an email via Nodemailer using Gmail SMTP or configured SMTP provider.
  */
-export async function sendEmail(options: SendEmailOptions): Promise<boolean> {
+export async function sendEmail(options: SendEmailOptions): Promise<SendEmailResult> {
   // biome-ignore lint/complexity/useLiteralKeys: process.env index signature for strict tsconfig
   const host = process.env["SMTP_HOST"] || "smtp.gmail.com";
   // biome-ignore lint/complexity/useLiteralKeys: process.env index signature for strict tsconfig
@@ -34,33 +41,43 @@ export async function sendEmail(options: SendEmailOptions): Promise<boolean> {
   if (!pass) {
     // biome-ignore lint/suspicious/noConsole: dev email fallback logging
     console.log(
-      `[DEV EMAIL MOCK] SMTP_PASS not set. Email to: ${options.to}\nSubject: ${options.subject}\nBody: ${options.text}`
+      `[DEV EMAIL MOCK] SMTP_PASS not set in .env! Email to: ${options.to}\nSubject: ${options.subject}\nBody: ${options.text}`
     );
-    return true;
+    return { success: true, delivered: false };
   }
 
-  const transporter = nodemailer.createTransport({
-    host,
-    port,
-    secure: port === 465,
-    auth: { user, pass },
-  });
+  try {
+    const transporter = nodemailer.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: { user, pass },
+    });
 
-  await transporter.sendMail({
-    from,
-    to: options.to,
-    subject: options.subject,
-    text: options.text,
-    html: options.html,
-  });
+    await transporter.sendMail({
+      from,
+      to: options.to,
+      subject: options.subject,
+      text: options.text,
+      html: options.html,
+    });
 
-  return true;
+    return { success: true, delivered: true };
+  } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: SMTP failure error reporting
+    console.error("❌ Gmail SMTP send error:", error);
+    return {
+      success: false,
+      delivered: false,
+      error: error instanceof Error ? error.message : "SMTP transport error",
+    };
+  }
 }
 
 /**
  * Send a 6-digit OTP verification email with clean monochrome GrumeUp styling.
  */
-export async function sendOtpEmail(email: string, otpCode: string): Promise<boolean> {
+export async function sendOtpEmail(email: string, otpCode: string): Promise<SendEmailResult> {
   const html = `
 <!DOCTYPE html>
 <html>
@@ -91,10 +108,16 @@ export async function sendOtpEmail(email: string, otpCode: string): Promise<bool
 
   const text = `GrumeUp Admin Verification Code: ${otpCode}\n\nThis code expires in 10 minutes.`;
 
-  return sendEmail({
+  const result = await sendEmail({
     to: email,
     subject: `Your GrumeUp Verification Code [${otpCode}]`,
     html,
     text,
   });
+
+  if (!result.delivered && result.success) {
+    result.mockCode = otpCode;
+  }
+
+  return result;
 }

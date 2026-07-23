@@ -9,7 +9,8 @@ describe("Email Utilities", () => {
   });
 
   it("should format and process sendOtpEmail in development mode", async () => {
-    const success = await sendOtpEmail("test@example.com", "123456");
-    expect(success).toBe(true);
+    const result = await sendOtpEmail("test@example.com", "123456");
+    expect(result.success).toBe(true);
+    expect(result.mockCode).toBe("123456");
   });
 });

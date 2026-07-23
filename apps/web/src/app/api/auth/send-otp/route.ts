@@ -39,11 +39,22 @@ export async function POST(request: Request) {
     await cache.set(cacheKey, otpPayload, 600);
 
     // Send 6-digit OTP code via Gmail SMTP
-    await sendOtpEmail(email, otpCode);
+    const emailResult = await sendOtpEmail(email, otpCode);
+
+    if (!emailResult.success) {
+      return NextResponse.json(
+        { error: emailResult.error || "Failed to send email via SMTP." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
-      message: `A 6-digit code has been sent to ${email}`,
+      delivered: emailResult.delivered,
+      mockCode: emailResult.mockCode,
+      message: emailResult.delivered
+        ? `A 6-digit verification code has been sent to ${email}`
+        : `[Dev Mode: SMTP_PASS not set in .env] Verification code: ${otpCode}`,
       expiresInSeconds: 600,
     });
   } catch (error) {

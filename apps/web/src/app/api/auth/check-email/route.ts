@@ -1,4 +1,4 @@
-import { findAdminByEmail } from "@grumeup/database";
+import { ensureInitialAdminExists, findAdminByEmail } from "@grumeup/database";
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -16,6 +16,10 @@ export async function POST(req: NextRequest) {
     }
 
     const { email } = parsed.data;
+
+    // Ensure initial admin sourced from .env is seeded into the database
+    await ensureInitialAdminExists();
+
     const admin = await findAdminByEmail(email);
 
     // Return boolean existence check without leaking sensitive user details
@@ -30,7 +34,9 @@ export async function POST(req: NextRequest) {
       exists: false,
       isAdmin: false,
     });
-  } catch {
+  } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: check-email error logging
+    console.error("[check-email error]:", error);
     return NextResponse.json(
       { error: "An error occurred while verifying email address" },
       { status: 500 }

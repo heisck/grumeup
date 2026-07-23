@@ -99,7 +99,13 @@ export function AuthCard() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = (await res.json()) as { success?: boolean; error?: string; message?: string };
+      const data = (await res.json()) as {
+        success?: boolean;
+        error?: string;
+        message?: string;
+        delivered?: boolean;
+        mockCode?: string;
+      };
 
       if (!res.ok || !data.success) {
         setError(data.error ?? "Invalid password.");
@@ -108,7 +114,13 @@ export function AuthCard() {
       }
 
       setStep("otp");
-      toast.success(data.message ?? "Verification code sent to your email!");
+      if (data.delivered) {
+        toast.success(`Verification code sent to ${email}! Check your Gmail inbox.`);
+      } else if (data.mockCode) {
+        toast.success(`Dev Mode: Your OTP code is ${data.mockCode}`);
+      } else {
+        toast.success(data.message ?? "Verification code sent!");
+      }
     } catch {
       setError("Network error sending verification code.");
       toast.error("Network error sending verification code.");

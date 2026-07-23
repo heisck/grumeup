@@ -13,7 +13,7 @@ const globalForPrisma = globalThis as unknown as {
 function createPrismaClient(): PrismaClient {
   const connectionString =
     process.env["DATABASE_URL"] ??
-    "postgresql://postgres:postgres@localhost:5432/grumeup?schema=public";
+    "postgresql://postgres:postgres@localhost:5434/grumeup?schema=public";
   const pool = new Pool({ connectionString });
   const adapter = new PrismaPg(pool);
 
