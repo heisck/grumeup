@@ -83,6 +83,7 @@ grumeup/
 - [Database](docs/DATABASE.md)
 - [Cache](docs/CACHE.md)
 - [Development Plan](docs/PLAN.md)
+- [Progress Tracking](docs/PROGRESS.md)
 
 ## License
 
