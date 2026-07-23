@@ -58,6 +58,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${roboto.variable} ${jetbrainsMono.variable}`}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <head>

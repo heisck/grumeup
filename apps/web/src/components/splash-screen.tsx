@@ -173,6 +173,7 @@ export function SplashScreen({ onComplete }: { onComplete?: () => void }) {
               width={192}
               height={48}
               priority
+              style={{ width: "auto", height: "auto" }}
               className="h-12 w-auto object-contain dark:invert transition-all scale-110 animate-in zoom-in-95 duration-200"
               src="/brand-wordmark.png"
             />

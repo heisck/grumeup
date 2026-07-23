@@ -65,6 +65,7 @@ export function TypingHeader() {
             alt="GrumeUp Icon"
             width={56}
             height={56}
+            style={{ width: "auto", height: "auto" }}
             className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
             priority
           />
@@ -77,6 +78,7 @@ export function TypingHeader() {
             alt="GrumeUp Icon"
             width={56}
             height={56}
+            style={{ width: "auto", height: "auto" }}
             className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
             priority
           />
@@ -89,6 +91,7 @@ export function TypingHeader() {
             alt="GrumeUp"
             width={192}
             height={48}
+            style={{ width: "auto", height: "auto" }}
             className="h-10 sm:h-12 w-auto object-contain dark:invert transition-all"
             priority
           />
