@@ -42,7 +42,7 @@
   "devDependencies": {
     "@grumeup/config": "workspace:*",
     "@next/bundle-analyzer": "^16.2.11",
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.62.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
