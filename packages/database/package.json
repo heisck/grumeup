@@ -15,18 +15,18 @@
   },
   "dependencies": {
     "@grumeup/utils": "workspace:*",
-    "@prisma/adapter-pg": "^7.9.0",
-    "@prisma/client": "^7.9.0",
-    "@prisma/config": "^7.9.0",
-    "pg": "^8.16.3"
+    "@prisma/adapter-pg": "^7.9.1",
+    "@prisma/client": "^7.9.1",
+    "@prisma/config": "^7.9.1",
+    "pg": "^8.23.0"
   },
   "devDependencies": {
     "@grumeup/config": "workspace:*",
     "@types/node": "^22.15.21",
-    "@types/pg": "^8.11.11",
+    "@types/pg": "^8.21.0",
     "dotenv": "^16.5.0",
-    "prisma": "^7.9.0",
-    "tsx": "^4.19.4",
+    "prisma": "^7.9.1",
+    "tsx": "^4.23.12",
     "typescript": "^5.8.3"
   }
 }
