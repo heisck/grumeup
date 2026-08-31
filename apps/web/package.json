@@ -42,14 +42,14 @@
   "devDependencies": {
     "@grumeup/config": "workspace:*",
     "@next/bundle-analyzer": "^16.2.11",
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^22.15.21",
-    "@types/react": "^19.1.6",
+    "@types/react": "^19.2.18",
     "@types/react-big-calendar": "^1.16.3",
-    "@types/react-dom": "^19.1.6",
+    "@types/react-dom": "^19.2.5",
     "@types/three": "^0.175.0",
     "@vitejs/plugin-react": "^4.5.2",
     "@vitest/coverage-v8": "^4.1.10",
@@ -58,6 +58,6 @@
     "postcss": "^8.5.22",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.8.3",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.11"
   }
 }
